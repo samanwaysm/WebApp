@@ -1,0 +1,215 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>User Registration</h2>
+        <form id="registrationForm">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="text" class="form-control" id="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="profession">Profession</label>
+                <input type="text" class="form-control" id="profession" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+        <div id="message" class="mt-3"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $('#registrationForm').on('submit', function(event) {
+            event.preventDefault();
+            const data = {
+                name: $('#name').val(),
+                email: $('#email').val(),
+                password: $('#password').val(),
+                phone: $('#phone').val(),
+                profession: $('#profession').val()
+            };
+            $.ajax({
+                url: 'http://localhost:5000/api/users/register',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(data),
+                success: function(response) {
+                    $('#message').text(response.message).addClass('alert alert-success');
+                },
+                error: function(error) {
+                    $('#message').text(error.responseJSON.message || 'Server error').addClass('alert alert-danger');
+                }
+            });
+        });
+    </script>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/register.css">
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="row navbar bg-primary text-white py-2">
+            <div class="col d-flex align-items-center">
+                <img src="/logo/notes.png" alt="Logo" class="logo mr-2">
+
+            </div>
+            <div class="col text-right">
+                <a href="/login"><button class="btn btn-secondary">Login</button></a>
+                <a href="/register"><button class="btn btn-primary">Signup</button></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container signup-container">
+        <h2 class="text-center">User Registration</h2>
+        <form action="/api/register" method="post" id="form">
+            <div class="form-group">
+                <label for="Name">Name</label>
+                <input type="text" class="form-control" id="Name" name="Name" placeholder="Enter first name">
+
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
+            </div>
+            <div class="form-group">
+                <label for="phoneNum">Phone Number</label>
+                <input type="text" class="form-control" id="phoneNum" name="phoneNum" placeholder="Enter Phone Number">
+
+            </div>
+            <div class="form-group">
+                <label for="profession">Profession</label>
+                <input type="text" class="form-control" id="profession" name="profession" placeholder="Enter Profession">
+
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
+                    placeholder="Confirm Password">
+
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Register</button>
+            <p class="text-center mt-3">
+                Already have an account? <a href="/login">Login</a>
+            </p>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script src="/js/register.js"></script>
+
+</body>
+
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/register.css">
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row navbar bg-primary text-white py-2">
+        <div class="col d-flex align-items-center">
+            <img src="/logo/notes.png" alt="Logo" class="logo mr-2">
+        </div>
+        <div class="col text-right">
+            <a href="/login"><button class="btn btn-secondary">Login</button></a>
+            <a href="/register"><button class="btn btn-primary">Signup</button></a>
+        </div>
+    </div>
+</div>
+
+<div class="container signup-container">
+    <h2 class="text-center">User Registration</h2>
+    <% if (message) { %>
+    <div class="alert alert-success">
+        <%= message %>
+    </div>
+    <% } %>
+    <% if (error) { %>
+    <div class="alert alert-danger">
+        <%= error %>
+    </div>
+    <% } %>
+    <form action="/api/register" method="post" id="form">
+        <div class="form-group">
+            <label for="Name">Name</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" >
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" >
+        </div>
+        <div class="form-group">
+            <label for="phoneNum">Phone Number</label>
+            <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter Phone Number" >
+        </div>
+        <div class="form-group">
+            <label for="profession">Profession</label>
+            <input type="text" class="form-control" id="profession" name="profession" placeholder="Enter Profession" >
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password" >
+        </div>
+        <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" >
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Register</button>
+        <p class="text-center mt-3">
+            Already have an account? <a href="/login">Login</a>
+        </p>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/js/register.js"></script>
+
+</body>
+</html>
